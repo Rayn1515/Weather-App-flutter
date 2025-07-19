@@ -380,7 +380,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
 //   final savedLocation = prefs.getString('lastLocation');
   
 //   if (savedLocation == null) {
-//     await _getCurrentLocation(); // Auto-detect on first launch
+//     await _getCurrentLocation(); 
 //   } else {
 //     _fetchWeather(savedLocation);
 //   }

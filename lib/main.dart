@@ -10,9 +10,7 @@ import 'package:geolocator/geolocator.dart';
 
 void main() => runApp(const MyApp());
 
-// ===================
 // Data Models
-// ===================
 class WeatherDetail {
   final String title;
   final String value;
@@ -73,9 +71,8 @@ class CurrentWeather {
   });
 }
 
-// ===================
 // API Models
-// ===================
+
 class WeatherApiResponse {
   final Location location;
   final Current current;
@@ -258,9 +255,7 @@ class Hour {
   }
 }
 
-// ===================
-// Custom Exceptions
-// ===================
+
 class WeatherApiException implements Exception {
   final String message;
   final int? statusCode;
@@ -283,12 +278,9 @@ class NetworkException implements Exception {
   String toString() => 'NetworkException: $message';
 }
 
-// ===================
-// Weather Service
-// ===================
 class WeatherService {
   static const String _baseUrl = 'http://api.weatherapi.com/v1';
-  static const String _apiKey = 'd38f322bc86a423c961133414251807';
+  static const String _apiKey = 'API_KEY';
   static const String _endpoint = '/forecast.json';
   static const int _days = 7;
   static const Duration _timeoutDuration = Duration(seconds: 10);
@@ -323,9 +315,8 @@ class WeatherService {
   }
 }
 
-// ===================
 // Main App
-// ===================
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -429,7 +420,6 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
     }
     _fetchWeather(savedLocation);
   } else {
-      // No saved location - try to get current position
       await _getCurrentLocation();
     }
   }
@@ -437,7 +427,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
   Future<void> _getCurrentLocation() async {
   setState(() {
     _isLoading = true;
-    _errorMessage = ''; // Hide button when getting fresh location
+    _errorMessage = ''; 
   });
   
   try {
@@ -886,7 +876,6 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
           child: SafeArea(
             child: Column(
               children: [
-                // Header with location and unit toggle
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
@@ -894,7 +883,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.add_location_alt, color: Colors.white),
-                        onPressed: _showLocationDialog, // This opens the location dialog
+                        onPressed: _showLocationDialog, 
                       ),
                       Text(
                         currentWeather.location,
@@ -976,7 +965,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
                       physics: const AlwaysScrollableScrollPhysics(),
                       child: Column(
                         children: [
-                          // Current weather with formatted temperature
+                
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Column(
@@ -1013,7 +1002,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
                             ),
                           ),
 
-                          // Hourly forecast with formatted temperature
+                       
                           SizedBox(
                             height: 120,
                             child: ListView.builder(
@@ -1047,7 +1036,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
                             ),
                           ),
 
-                          // Daily forecast with formatted temperature
+                    
                           Container(
                             margin: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
@@ -1081,7 +1070,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
                             ),
                           ),
 
-                          // Weather details grid
+                        
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: GridView.count(
